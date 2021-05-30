@@ -64,7 +64,7 @@ import { api } from 'boot/axios'
 export default {
   data(){
     return{
-      titulo:'',
+      titulo:null,
       como:'',
       quiero:'',
       para:'',
@@ -76,12 +76,13 @@ export default {
   methods: {
     async crearHistoria(){
       try {
-       await api.post('/historia',{
+       await api.post('/historias',{
           body:{
             titulo:this.titulo,
             como:this.como,
             quiero: this.quiero,
             para: this.para,
+            estado:true,
             criterio_aceptacion:this.criterio,
             id_proyecto: this.$route.params.id
           }
@@ -89,14 +90,15 @@ export default {
       } catch (error) {
         console.log(error)
       }
+      this.onReset()
       
     },
     onReset () {
-      this.como = null
-      this.quiero = null
-      this.para = null
-      this.titulo = null
-      this.criterio = null
+      this.como = ' '
+      this.quiero = ' '
+      this.para = ' '
+      this.titulo = ' '
+      this.criterio = ' '
     },
     onSubmit () {
       if(this.como===''|| this.titulo==='' || this.para==='' || this.quiero==='' || this.criterio==='' ){

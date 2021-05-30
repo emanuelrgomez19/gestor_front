@@ -2,9 +2,6 @@
   <div class="q-pa-md q-gutter-sm">
     <q-btn label="Nuevo proyecto" rounded icon="add" color="primary" @click="prompt = true" />
     <q-dialog v-model="prompt" persistent>
-        
-        
-
       <q-card style="min-width: 350px">
         <q-card-section>
           <div class="text-h6">Nuevo proyecto</div>
@@ -30,7 +27,7 @@
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Cancel" v-close-popup type="submit" />
+          <q-btn flat label="Cancel" v-close-popup type="" />
           <q-btn flat color="green" label="Crear"  type="submit" />
         </q-card-actions>
         </q-form>
@@ -55,8 +52,7 @@ export default {
   methods:{
     async crearProyecto(){
       try {
-          console.log("POR CA")
-      await api.post('http://localhost:8081/proyecto',{
+     await api.post('/proyectos',{
           body:{
             nombre:this.nombre,
             descripcion:this.descripcion,
@@ -64,8 +60,7 @@ export default {
           }
         })        
       } catch (error) {
-        console.log(error)
-        
+        console.log(error)        
       }
           
     },
@@ -80,16 +75,11 @@ export default {
       }
       else {
         this.crearProyecto()
-        // this.proyectos.push({
-        //   nombre:this.nombre,
-        //   descripcion:this.descripcion,
-        //   estado:true
-        // })
         this.$q.notify({
           color: 'green-4',
           textColor: 'white',
           icon: 'cloud_done',
-          message: 'Submitted'
+          message: 'Se creo proyecto'
         })
         this.prompt = false
         this.onReset()

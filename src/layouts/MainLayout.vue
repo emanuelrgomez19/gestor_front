@@ -55,6 +55,11 @@ const linksData = [
     caption: 'elperro.dev',
     icon: 'school',
     link: 'https://elperro.dev'
+  },{
+    title: 'Repores ',
+    caption: 'elperro.dev',
+    icon: 'assessment',
+    link: 'https://elperro.dev'
   },
 ];
 
