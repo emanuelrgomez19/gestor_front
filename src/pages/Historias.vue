@@ -1,8 +1,8 @@
 <template>
     <q-page padding>
-       
-    <ListHistorias :historias="historias" />
-    <q-btn @click="back" icon="undo"/>
+        
+        <ListHistorias :historias="historias" />
+        <q-btn @click="back" icon="undo"/>
         
     </q-page>
     

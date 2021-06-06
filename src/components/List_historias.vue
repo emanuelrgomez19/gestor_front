@@ -1,10 +1,10 @@
 <template>
-    <q-page padding>
-    <div class="row justify-between items-center q-pa-sm">
-        <h6>Historias</h6>
+    <div class="q-ma-ss">
+     <div class="row justify-between items-center">
+        <h4>Historias</h4>
         <q-btn label="Nueva historia" rounded icon="add" color="primary" @click="agregar" />
-    </div>
-        <q-table
+     </div>
+       <q-table
         bordered
         class=""
         :data="historias"
@@ -15,16 +15,17 @@
         color="secondary"
         >
         <!-- gets displayed only when there's at least one row selected -->
-            <template slot="top-selection" slot-scope="">
-                <q-btn color="primary" flat label="Agregar escenario" icon="add"/>
-                <q-btn color="primary" flat label="Editar" class="q-mr-sm" icon="edit" @click="editar"/>
-                <div class="col" />
-                <q-btn color="negative" label="Eliminar" flat round delete icon="delete"/>
-    
+            <template slot="top-selection" slot-scope="" >
+                <div class="bg-light-green-1 col">
+                    <q-btn color="primary " flat label="Agregar escenario" icon="add"/>
+                    <q-btn color="primary " flat label="Editar" class="q-mr-sm" icon="edit" @click="editar"/>
+                    <q-btn color="primary " flat label="Ver escenarios" class="q-mr-sm" icon="remove_red_eye" @click="editar"/>
+                    <q-btn  color="negative " label="Eliminar" flat round delete icon="delete"/>
+                </div>
             </template>
         </q-table>
         
-    </q-page>
+    </div>
 </template>
   
 <script>
@@ -61,23 +62,20 @@ const colums = [
         {
         name:'como',
         label:'Como',
-        align:'left',
+        align:'center',
         field:'como',
-        sortable:true
     },
         {
         name:'quiero',
         label:'Quiero',
-        align:'left',
+        align:'center',
         field:'quiero',
-        sortable:true
     },
      {
         name:'para',
         label:'Para',
-        align:'left',
+        align:'center',
         field:'para',
-        sortable:true
         
     },
      
