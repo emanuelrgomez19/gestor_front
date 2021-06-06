@@ -55,6 +55,7 @@
         </q-btn-group>
 
     </q-form>
+    <q-btn @click="back" icon="undo"/>
   </q-page>
 </template>
 
@@ -74,6 +75,9 @@ export default {
 
   },
   methods: {
+    back(){
+      this.$router.go(-1)
+    },
     async crearHistoria(){
       try {
        await api.post('/historias',{
@@ -111,7 +115,7 @@ export default {
           color: 'green-4',
           textColor: 'white',
           icon: 'cloud_done',
-          message: 'Submitted'
+          message: 'Se agrego nueva Historia'
       })
       }
       

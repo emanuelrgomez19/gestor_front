@@ -64,7 +64,7 @@ export default {
       }
           
     },
-     onSubmit () {
+    async onSubmit () {
       if (this.nombre == ''||this.descripcion == '') {
         this.$q.notify({
           color: 'red-5',
@@ -74,15 +74,16 @@ export default {
         })
       }
       else {
-        this.crearProyecto()
+        await this.crearProyecto()
         this.$q.notify({
           color: 'green-4',
           textColor: 'white',
           icon: 'cloud_done',
           message: 'Se creo proyecto'
         })
+        this.$router.go(0)
         this.prompt = false
-        this.onReset()
+        //this.onReset()
       }
     },
     onReset () {
