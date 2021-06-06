@@ -56,7 +56,7 @@ const linksData = [
     icon: 'school',
     link: 'https://elperro.dev'
   },{
-    title: 'Repores ',
+    title: 'Reportes ',
     caption: 'elperro.dev',
     icon: 'assessment',
     link: 'https://elperro.dev'
