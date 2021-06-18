@@ -41,6 +41,7 @@ export default {
                   item.como = element.como
                   item.quiero = element.quiero
                   item.para = element.para
+                  console.log(item)
                   this.historias.push(item)
                   
               });

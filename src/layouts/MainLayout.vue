@@ -54,12 +54,15 @@ const linksData = [
     title: 'Proyectos',
     caption: 'elperro.dev',
     icon: 'school',
-    link: 'https://elperro.dev'
+    link: 'https://elperro.dev',
+    url: '/'
   },{
     title: 'Reportes ',
     caption: 'elperro.dev',
     icon: 'assessment',
-    link: 'https://elperro.dev'
+    link: 'https://elperro.dev',
+    url: '/reportes'
+
   },
 ];
 

@@ -1,7 +1,7 @@
 <template>
   <q-item
     clickable
-    to="/"
+    :to= url
   >
     <q-item-section
       v-if="icon"
@@ -21,6 +21,9 @@
 
 <script>
 export default {
+  data(){
+  
+  },
   name: 'EssentialLink',
   props: {
     title: {
@@ -41,7 +44,16 @@ export default {
     icon: {
       type: String,
       default: ''
+    },
+    url:{
+      type: String,
+      
     }
-  }
+  },
+  methods: {
+    hola(){
+      alert()
+    } 
+  },
 }
 </script>

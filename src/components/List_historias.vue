@@ -29,7 +29,6 @@
 </template>
   
 <script>
-import routes from 'src/router/routes'
 
 
 const filas = [

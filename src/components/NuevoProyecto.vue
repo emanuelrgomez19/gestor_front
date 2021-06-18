@@ -49,10 +49,12 @@ export default {
       address: ''
     }
   },
+  //AGREGAR CABECERA A LOS POST 
   methods:{
     async crearProyecto(){
       try {
      await api.post('/proyectos',{
+        
           body:{
             nombre:this.nombre,
             descripcion:this.descripcion,
