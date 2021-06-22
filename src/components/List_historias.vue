@@ -1,7 +1,7 @@
 <template>
     <div class="q-ma-ss">
      <div class="row justify-between items-center">
-        <h4>Historias</h4>
+        <h4>Historiaaas</h4>
         <q-btn label="Nueva historia" rounded icon="add" color="primary" @click="agregar" />
      </div>
        <q-table

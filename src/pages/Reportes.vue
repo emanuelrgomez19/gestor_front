@@ -16,7 +16,6 @@ import { api } from 'boot/axios'
 export default {
   data () {
     return {
-        
       columns: [
         {
           name: 'name',
@@ -28,18 +27,9 @@ export default {
           sortable: true
         },
         { name:'descripcion', align: 'center', label: 'Historias', field: 'descripcion', sortable: true },
-
-
       ],
       reportes:[]
-
-
-
-
-
     }
-
-
   },
    created(){
     this.reporte();
@@ -56,14 +46,10 @@ export default {
             item.estado  = element.estado
             console.log(item)
             this.reportes.push(item)
-       })
-
-              
-      } catch (error) {
-              console.log(error)
-              
+          })     
+          } catch (error) {
+            console.log(error)              
           }
-
       }
   }
 }

@@ -27,10 +27,11 @@
       <q-card-section class="col-1 " v-html="item.id"/>
       <q-card-section class="col-2 q-pa-xs items-center" v-html="item.nombre"/>
       <q-card-section class="col q-pa-xs items-center" v-html="item.descripcion"/>
-      <q-btn-group rounded row q-mt-xs q-p q-pa-xs items-center  >
-        <q-btn padding="xs lg" rounded color="cyan-3" glossy text-color="black" push icon="visibility" :to="{name:'casoid',params:{id: item.id}}" />
-        <q-btn padding="xs lg" rounded color="cyan-12" glossy text-color="black" push icon="edit" /> 
-        <q-btn color="deep-orange-3" rounded glossy text-color="black" push  icon="delete"  @click="eliminar(index)"/>
+      <q-btn-group  row q-mt-xs q-p q-pa-xs items-center  >
+        <q-btn  size="sm"  outline  class="col q-mr-xs" color="blue" label="" icon="visibility" push :to="{name:'casoid',params:{id: item.id}}" />
+        <q-btn  size="sm"  outline  class="col q-mr-xs" color="green" label="" icon="edit" push :to="{name:'proyectoid',params:{id: item.id}}" />
+        <q-btn  size="sm"  outline  class="col q-mr-xs" color="red" label="" icon="delete" push @click="eliminar(item.id)" />
+       
       </q-btn-group>
     </q-card>
 
@@ -74,18 +75,17 @@ export default {
         console.log(error)
         
       }
-    },
-
-    eliminar(index){
-      this.$q.dialog({
-        titile:'acccion',
-        message:'real',
-        cancel:true,
-        persistent:true
-      }).onOk(()=>{
-      this.proyectos.splice(index, 1)
-
-      })
+    },    
+    async eliminar (index) {
+      try {
+        let response = await api.delete('/proyectos/' + index,{});
+        console.log(response)
+        if(response.status == 200){
+          location.reload() //preguntar por eficiencia         
+        }
+      } catch (error) {
+        console.log(error)
+      }      
     },
     onSubmit () {
       if (this.nombre == ''||this.descripcion == '') {

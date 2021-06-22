@@ -71,7 +71,7 @@ export default {
   components: { EssentialLink },
   data () {
     return {
-      leftDrawerOpen: false,
+      leftDrawerOpen: true,
       essentialLinks: linksData
     }
   }

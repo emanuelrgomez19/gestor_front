@@ -27,7 +27,7 @@
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Cancel" v-close-popup type="" />
+          <q-btn flat label="Cancel" v-close-popup type="" to="/" />
           <q-btn flat color="green" label="Crear"  type="submit" />
         </q-card-actions>
         </q-form>
@@ -49,24 +49,25 @@ export default {
       address: ''
     }
   },
-  //AGREGAR CABECERA A LOS POST 
   methods:{
     async crearProyecto(){
       try {
-     await api.post('/proyectos',{
-        
+        let response = await api.post('/proyectos',{
           body:{
             nombre:this.nombre,
             descripcion:this.descripcion,
             estado: this.estado
           }
-        })        
+        })
+        if(response.status == 201){
+          location.reload()
+        }
       } catch (error) {
         console.log(error)        
       }
           
     },
-    async onSubmit () {
+     onSubmit () {
       if (this.nombre == ''||this.descripcion == '') {
         this.$q.notify({
           color: 'red-5',
@@ -76,16 +77,15 @@ export default {
         })
       }
       else {
-        await this.crearProyecto()
+        this.crearProyecto()
         this.$q.notify({
           color: 'green-4',
           textColor: 'white',
           icon: 'cloud_done',
           message: 'Se creo proyecto'
         })
-        this.$router.go(0)
         this.prompt = false
-        //this.onReset()
+        this.onReset()
       }
     },
     onReset () {

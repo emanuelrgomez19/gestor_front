@@ -1,8 +1,8 @@
 <template>
     <q-page padding>
         <div class="row justify-between items-center">
-            <h4>Historias</h4>            
-            <q-btn label="Nueva historia" rounded icon="add" color="primary" @click="agregar" />
+            <h4>Escenarios</h4>            
+            <q-btn label="Nuevo escenario   " rounded icon="add" color="primary" @click="agregar" />
         </div>        
         <q-card flat bordered class="q-ma-xs my-card bg-grey-1"  v-for= "(item,index) in historias" :key="index">
             <q-card-section class=""  >

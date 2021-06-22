@@ -1,8 +1,7 @@
 <template>
   <q-page padding>
     <q-form
-      @submit="onSubmit"
-      @reset="onReset">
+      @submit="onSubmit">
       <q-input
         class="q-pa-xs"
         filled
@@ -20,7 +19,7 @@
           label="Como"
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Campo requerido']"
-        ></q-input>  
+        ></q-input> 
         <q-input
           color="teal"
           filled
@@ -58,7 +57,7 @@
         ></q-input>
         <q-btn-group spread class="q-mt-xl">
           <q-btn color="blue" label="Volver" icon="back" @click="back" />
-          <q-btn color="green" label="Crear" icon="done_all" type="submit" />          
+          <q-btn color="green" label="Editar" icon="done_all" type="submit" />
         </q-btn-group>
 
     </q-form>
@@ -69,76 +68,77 @@
 import { api } from 'boot/axios'
 
 export default {
-  data(){
-    return{
-      titulo:null,
-      como:'',
-      quiero:'',
-      para:'',
-      criterio:'',
-      id_proyecto: ''
-    }
+  data: function() {
+      return{
+        titulo:null,
+        como:'',
+        para:'',
+        quiero: '',
+        criterio:'',
+        id_proyecto:''
+      }
   },
-   created(){
-      this.insertarIdProyecto();
+  created(){
+      this.getHistoria();
     },
-  
   methods: {
-    async crearHistoria(){
-      try {
-       let response = await api.post('/historias',{
-          body:{
-            titulo:this.titulo,
-            como:this.como,
-            quiero: this.quiero,
-            para: this.para,
-            estado:true,
-            criterio_aceptacion:this.criterio,
-            id_proyecto: this.$route.params.id
+      async getHistoria(){
+        try {
+          const historiaBack = await api.get('/historias/' + this.$route.params.id)
+            this.titulo = historiaBack.data.titulo
+            this.como = historiaBack.data.como
+            this.criterio = historiaBack.data.criterio_aceptacion
+            this.para = historiaBack.data.para
+            this.quiero = historiaBack.data.quiero
+            this.id_proyecto = historiaBack.data.id_proyecto
+        } catch (error) {
+          console.log(error)              
+        }
+      },
+      async editHistoria(){
+        try {
+         let response = await api.patch('/historias/' + this.$route.params.id,{
+           body:{
+             titulo:this.titulo,
+             como:this.como,
+             para:this.para,
+             quiero: this.quiero,
+             criterio_aceptacion:this.criterio,
+             id_proyecto: this.id_proyecto
           }
         })
+        console.log(response)
         if(response.status == 201){
-            this.back()
-          }       
+          this.back()
+        }                
       } catch (error) {
         console.log(error)
-      }
-      this.onReset()
-      
+      }               
+    },
+    onReset () {
+      this.como = ' '
+      this.para = ' '
+      this.titulo = ' '
+      this.quiero = ' '
+      this.criterio = ' '
+      this.id_proyecto = ' '
     },
     back(){
       this.$router.go(-1)
     },
-    insertarIdProyecto(){
-      this.id_proyecto = this.$route.params.id
-    },
-    onReset () {
-      this.como = ' '
-      this.quiero = ' '
-      this.para = ' '
-      this.titulo = ' '
-      this.criterio = ' '
-    },
     onSubmit () {
-      if(this.como===''|| this.titulo==='' || this.para==='' || this.quiero==='' || this.criterio==='' ){
-        console.log(this.como)
+      if(this.como ==''|| this.titulo =='' || this.para =='' || this.criterio =='' || this.id_proyecto =='' ){        
         console.log('CAMPOS VACIO')
-
       }else{
-         this.crearHistoria()
+         this.editHistoria()
          this.$q.notify({
           color: 'green-4',
           textColor: 'white',
           icon: 'cloud_done',
           message: 'Submitted'
       })
-      }
-      
-    },
-
-    
+      }      
+    },    
   },
-
-
 }
 </script>
