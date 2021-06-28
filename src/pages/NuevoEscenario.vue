@@ -6,7 +6,7 @@
       <q-input
         class="q-pa-xs"
         filled
-        v-model="titulo"
+        v-model="objetivo"
         label="Nombre caso de prueba"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Campo requerido']"
@@ -16,7 +16,7 @@
           color="teal"
           filled
           class="col-xs-12  col-md-4 q-pa-xs q-mt-xl"
-          v-model="como"
+          v-model="descripcion"
           label="Descripcion"
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Campo requerido']"
@@ -25,26 +25,16 @@
           color="teal"
           filled
           class="col-xs-12  col-md-4 q-pa-xs q-mt-xl"
-          v-model="quiero"
+          v-model="preCondicion"
           label="Pre condicion"
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Campo requerido']"
-        ></q-input>        
-        <q-input
-          color="teal"
-          class="col-xs-12  col-md-4 q-pa-xs q-mt-xl"
-          filled
-          v-model="para"
-          label="Secuencia"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Campo requerido']"
-        ></q-input>
-      
+        ></q-input>            
       <q-input
           color="teal"
           class="col-xs-12  col-md-4 q-pa-xs q-mt-xl"
           filled
-          v-model="criterio"
+          v-model="posCondicion"
           label="Pos condicion"
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Campo requerido']"
@@ -53,7 +43,7 @@
           color="teal"
           class="col-xs-12  col-md-4 q-pa-xs q-mt-xl"
           filled
-          v-model="id_proyecto"
+          v-model="id_historia"
           label="Historia"          
         ></q-input>
         <q-btn-group spread class="q-mt-xl">
@@ -71,12 +61,12 @@ import { api } from 'boot/axios'
 export default {
   data(){
     return{
-      titulo:null,
-      como:'',
-      quiero:'',
-      para:'',
-      criterio:'',
-      id_proyecto: ''
+      objetivo:'',
+      descripcion:'',
+      preCondicion:'',
+      secuencia:'',
+      posCondicion:'',
+      id_historia: ''
     }
   },
    created(){
@@ -84,17 +74,16 @@ export default {
     },
   
   methods: {
-    async crearHistoria(){
+    async crearEscenario(){
       try {
-       let response = await api.post('/historias',{
+       let response = await api.post('/escenarios',{
           body:{
-            titulo:this.titulo,
-            como:this.como,
-            quiero: this.quiero,
-            para: this.para,
+            objetivo:this.objetivo,
+            descripcion:this.descripcion,
+            pre_condicion: this.preCondicion,
+            pos_condicion:this.posCondicion,
             estado:true,
-            criterio_aceptacion:this.criterio,
-            id_proyecto: this.$route.params.id
+            id_historia: this.$route.params.id
           }
         })
         if(response.status == 201){
@@ -110,10 +99,10 @@ export default {
       this.$router.go(-1)
     },
     insertarIdProyecto(){
-      this.id_proyecto = this.$route.params.id
+      this.id_historia = this.$route.params.id
     },
     onReset () {
-      this.como = ' '
+      this.nombre = ' '
       this.quiero = ' '
       this.para = ' '
       this.titulo = ' '
@@ -125,7 +114,7 @@ export default {
         console.log('CAMPOS VACIO')
 
       }else{
-         this.crearHistoria()
+         this.crearEscenario()
          this.$q.notify({
           color: 'green-4',
           textColor: 'white',

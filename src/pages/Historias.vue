@@ -8,11 +8,11 @@
             <q-card-section class=""  >
                 <div class="row justify-center full-width">
                     <div class="col">
-                        <div class="text-bold col text-center bg-lime-3">ID</div>
+                        <div class="text-bold col text-center bg-amber-11">ID</div>
                         <div v-text="item.id" class="text-center"></div>
                     </div>
                     <div class="col">
-                        <div class="text-bold col text-center bg-lime-2">TITULO</div>
+                        <div class="text-bold col text-center bg-amber-12">TITULO</div>
                         <div v-text="item.titulo" class="text-center"></div>
                     </div>
                     <div class="col" >
